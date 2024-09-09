@@ -14,11 +14,11 @@ export const transactionResolver = {
         },
         categoryStatistics: async () => {
             // get array of category statistics
-            
+
         }
     },
     Mutation: {
-
+        
     }
 	
 	

@@ -23,6 +23,34 @@ export const userResolver = {
     logOut: async () => {
         return { message: "Logged out successfully"}
     },
-    
-  }
-};
+    signUp: async (_, {input}) => {
+        try {
+            const newUser = {
+                ...input,
+                _id: String(users.length + 1)
+            }
+        }catch (err){
+            console.log(err);
+            throw new Error(err.message || "Error creating user");
+        }
+    },
+    login: async (_, {input}) => {
+        try {
+            const user = await users.find((user) => user.username === input.username);
+            const isPasswordValid = await users.find((user) => user.password === input.password);
+            if (!user) {
+                throw new Error("User not found")
+            }
+            else if (!isPasswordValid) {
+                throw new Error("Invalid password")
+            }
+            else {
+                return user;
+            }
+        }catch (err) {
+            console.error("Error in login mutation:", err);
+            throw new Error(err.message || "Error logging in");
+        }
+    }
+}
+}
