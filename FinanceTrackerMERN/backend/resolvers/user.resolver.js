@@ -2,7 +2,7 @@ import { users } from "../dummyData/data.js";
 
 export const userResolver = {
   Query: {
-    users: async () => {
+    users: async (_,_,context) => {
       return users;
     },
     authUser: async () => {
